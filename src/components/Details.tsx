@@ -9,7 +9,6 @@ export interface DetailsProps extends RouteComponentProps<{id:string;}>{}
 const Details: React.SFC<DetailsProps>=({history,match:{params:{id}}})=>{
 const [vorname,setVorname]=useState<string|any>();
 const [nachname,setNachname]=useState<string|any>();
-//const [skill,setSkill]=useState<string|any>();
 const [geburtsdatum,setGeburtsdatum]=useState<string|any>();
 const [email,setEmail]=useState<string|any>();
 const [geschlecht,setGeschlescht]=useState<string|any>();
@@ -27,6 +26,7 @@ const [person, setPerson]=useState<Person>({
  })
 const getPerson=async ()=>{
     let r=(await getContact(Number(id))).data;   
+    console.log(r);
     setPerson(r);
 }
 

@@ -12,6 +12,7 @@ import DataTablePagination from './DataTable/Pagination';
 import Swal from 'sweetalert2';
 
 import withReactContent from 'sweetalert2-react-content';
+import { Link } from 'react-router-dom';
 
 export interface AdressbuchProps { }
 
@@ -222,6 +223,14 @@ const PersonList: React.SFC<AdressbuchProps> = (props) => {
         </Button>
       ),
     },
+    {
+      name: 'Details',
+      accessor: row => (
+        <Link to={`/${row.id}/details`} className="btn btn-info shadow-sm"> Detail</Link>  
+      ),
+    }
+
+   
   ];
   return (<>
 

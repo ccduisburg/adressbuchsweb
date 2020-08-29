@@ -11,19 +11,8 @@ import Header2 from './app/Header2';
 const App:React.SFC=props=>{
   return (
 
-       <BrowserRouter>
-      {/* //     <main className="container"> 
-      //     <Route  path="/" component={Header2} />   
-      //  <Switch>
-      
-      
-    
-      //  </Switch> 
-      // </main> */}
-      
-     
-         <Route  path="/" component={HomePage} />
-     
+       <BrowserRouter>           
+         <Route  path="/" component={HomePage} />     
       </BrowserRouter>
    
   )
