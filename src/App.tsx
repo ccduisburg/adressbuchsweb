@@ -5,21 +5,25 @@ import Adressbuchs from './components/Adressbuchs';
 import Details from './components/Details';
 import PersonList from './components/PersonList';
 import HomePage from './app/HomePage';
+import Header2 from './app/Header2';
 
 
 const App:React.SFC=props=>{
   return (
 
-      <BrowserRouter>
-          <main className="container"> 
-          <HomePage/>    
-       <Switch>
-        <Route exact path="/list" component={PersonList}/>
-        <Route exact path="/:id/details" component={Details}/>   
+       <BrowserRouter>
+      {/* //     <main className="container"> 
+      //     <Route  path="/" component={Header2} />   
+      //  <Switch>
+      
       
     
-       </Switch> 
-      </main>
+      //  </Switch> 
+      // </main> */}
+      
+     
+         <Route  path="/" component={HomePage} />
+     
       </BrowserRouter>
    
   )
