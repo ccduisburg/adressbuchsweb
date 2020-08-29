@@ -3,7 +3,7 @@ export interface Person {
     titel:string;
     name:string,
     vorname:string,
-    email: Maybe<Scalars['String']>,
+    email: string,
     geschlecht:string,
     geburstdatum:Date,
     adresse: string;
@@ -18,3 +18,8 @@ export type Scalars = {
   Float: number,
   Date: any,
 };
+export enum Geschlescht {           
+  MÄNNLICH ="MÄNNLICH",
+  WEIBLICH="WEIBLICH",
+  DIVERS="DIVERS"
+}

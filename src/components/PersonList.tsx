@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Alert, Button, Form, Nav, FormControlProps, InputGroup, Row, Col } from 'react-bootstrap';
+import { Alert, Button, Form, Nav, FormControlProps, InputGroup, Row, Col, Container } from 'react-bootstrap';
 import { DataTableColumn } from './DataTable/types';
 import * as TimeUtils from '../util/TimeUtil';
 import DataTable from './DataTable/DataTable';
@@ -12,11 +12,11 @@ import DataTablePagination from './DataTable/Pagination';
 import Swal from 'sweetalert2';
 
 import withReactContent from 'sweetalert2-react-content';
-import { Link } from 'react-router-dom';
+import { Link,RouteComponentProps,RouteProps } from 'react-router-dom';
 
 export interface AdressbuchProps { }
 
-const PersonList: React.SFC<AdressbuchProps> = (props) => {
+const PersonList: React.SFC<AdressbuchProps> = ( props) => {
   const [nameFilter, setNameFilter] = React.useState<string | null>("");
   const [emailFilter, setEmailFilter] = React.useState<string | null>('');
   const [vorname, setVorname] = React.useState<string | any>();
@@ -225,15 +225,17 @@ const PersonList: React.SFC<AdressbuchProps> = (props) => {
     },
     {
       name: 'Details',
-      accessor: row => (
-        <Link to={`/${row.id}/details`} className="btn btn-info shadow-sm"> Detail</Link>  
+      accessor: (row) => (
+          <td> <Link to={`/${row.id}/details`} className="btn btn-info shadow-sm"> Detail</Link> </td>  
       ),
     }
 
    
   ];
   return (<>
-
+  <Container fluid={true} className="d-flex">
+            {/* left-side */}
+            <Container fluid={true} className="w-50">
     <Form.Row>
       <Form.Label>Suchen</Form.Label>
     </Form.Row>
@@ -264,8 +266,8 @@ const PersonList: React.SFC<AdressbuchProps> = (props) => {
       </Form.Group>
     </Form.Row>
 
-
-
+    </Container>
+</Container>
     <DataTable
       idColumnName="id"
       data={personal && personal ? personal : null}
@@ -273,6 +275,7 @@ const PersonList: React.SFC<AdressbuchProps> = (props) => {
       showHeader
       showSuche
     />
+
   </>)
 };
 export default PersonList;

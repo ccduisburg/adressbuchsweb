@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { Alert, Button, Form, Nav, FormControlProps, InputGroup, Row, FormControl, Col } from 'react-bootstrap';
+import { Alert, Button, Form, Nav, FormControlProps, InputGroup, Row, FormControl, Col, Container } from 'react-bootstrap';
 import { DataTableColumn } from './DataTable/types';
 import * as TimeUtils from '../util/TimeUtil';
 import DataTable from './DataTable/DataTable';
 import TableEditorText from './DataTable/Text';
-import { Person } from '../types/Person';
+import { Person, Geschlescht } from '../types/Person';
 import { deleteContact, getContacts, addContact, getPersonbyname, getPersonbyemail } from './services/Requests';
 import { error, Console } from 'console';
 
@@ -23,7 +23,7 @@ const PersonHinzufuegen: React.SFC<AdressbuchProps> = (props) => {
     const [geburstdatum, setGeburstdatum] = useState<string | any>();
     type FormContr = React.FormEvent<FormControlProps>;
     const [nocookie] = useState<boolean>(false);
-    const [email, setEmail] = useState<string>();
+    const [email, setEmail] = useState<string|any>();
     const [geschlecht, setGeschlecht] = useState<string | any>();
     const [titel, setTitel] = useState<string | any>();
     const [adresse, setAdresse] = useState<string | any>();
@@ -59,11 +59,11 @@ const PersonHinzufuegen: React.SFC<AdressbuchProps> = (props) => {
 
     }, [titel, name, vorname, email, adresse]);
 
-    enum Geschlescht {
-        MÄNNLICH = "MÄNNLICH",
-        WEIBLICH = "WEIBLICH",
-        DIVERSE = "DIVERSE"
-    }
+    // enum Geschlescht {           
+    //     MÄNNLICH = "MÄNNLICH",
+    //     WEIBLICH = "WEIBLICH",
+    //     DIVERS = "DIVERSE"
+    // }
 
 
     const addPerson = async (person: Person) => {
@@ -108,9 +108,7 @@ const PersonHinzufuegen: React.SFC<AdressbuchProps> = (props) => {
             e.preventDefault();
             e.stopPropagation();
         }
-
-        setValidated(true);
-        // submitForm
+        setValidated(true);       
         if (valid === true) {
             aktionSave(e);
         }
@@ -132,7 +130,9 @@ const PersonHinzufuegen: React.SFC<AdressbuchProps> = (props) => {
     // };
 
     return (<><div>
-
+  <Container fluid={true} className="d-flex">
+            {/* left-side */}
+            <Container fluid={true} className="w-50">
         <Form noValidate validated={validated} onSubmit={evt => handleSubmit(evt)}>
             {error && <Alert variant="info" show={showAlertError}>{error}</Alert>}
             <div className="row">
@@ -234,10 +234,15 @@ const PersonHinzufuegen: React.SFC<AdressbuchProps> = (props) => {
                 <Form.Group as={Col} md="12" controlId="geshlecht">
 
                     <Form.Label>Geshlecht</Form.Label>
-                    <Form.Control as="select" defaultValue="Choose..." >
-                        <option value="0">{Geschlescht.DIVERSE}</option>
-                        <option value="1">{Geschlescht.MÄNNLICH}</option>
-                        <option value="2">{Geschlescht.WEIBLICH}</option>
+                    <Form.Control as="select" defaultValue="Choose..."
+                     onChange={(e) => (setGeschlecht(e.target.value))}
+
+                
+                    >
+                        <option value="DIVERS">{Geschlescht.DIVERS}</option>
+                        <option value="MÄNNLICH">{Geschlescht.MÄNNLICH}</option>
+                        <option value="WEIBLICH">{Geschlescht.WEIBLICH}</option>
+                        
                     </Form.Control>
 
                 </Form.Group>
@@ -268,6 +273,8 @@ const PersonHinzufuegen: React.SFC<AdressbuchProps> = (props) => {
                 Hinzufügen
                                                         </Button>
         </Form>
+        </Container>
+        </Container>
     </div>
     </>
 

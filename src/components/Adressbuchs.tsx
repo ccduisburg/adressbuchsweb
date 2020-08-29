@@ -24,8 +24,7 @@ return(
         {personal.map(person=>(
             <li key={person.id} className="list-group-items d-flex justify-content-between">
                 <h3><td> </td>  
-                    <th>{person.vorname}</th>
-                  
+                  <th>{person.vorname}</th>                  
                   <td>{person.name} </td>  
                   <td> {person.geschlecht} </td>  
                   <td> {person.geburstdatum} </td>  
