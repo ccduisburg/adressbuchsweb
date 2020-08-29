@@ -1,26 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import Adressbuchs from './components/Adressbuchs';
+import Details from './components/Details';
+import PersonList from './components/PersonList';
+import HomePage from './app/HomePage';
 
-function App() {
+
+const App:React.SFC=props=>{
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+      <BrowserRouter>
+          <main className="container"> 
+          <HomePage/>    
+       <Switch>
+        <Route exact path="/list" component={PersonList}/>
+        <Route exact path="/:id/details" component={Details}/>   
+      
+    
+       </Switch> 
+      </main>
+      </BrowserRouter>
+   
+  )
 }
+
 
 export default App;
