@@ -226,7 +226,8 @@ const PersonList: React.SFC<AdressbuchProps> = ( props) => {
     {
       name: 'Details',
       accessor: (row) => (
-          <td> <Link to={`/${row.id}/details`} className="btn btn-info shadow-sm"> Detail</Link> </td>  
+            <Link to={`/${row.id}/details`} className="btn btn-info shadow-sm"> Detail</Link> 
+
       ),
     }
 
@@ -253,7 +254,7 @@ const PersonList: React.SFC<AdressbuchProps> = ( props) => {
         />
 
       </Form.Group>
-      <Form.Group as={Col} md="6" controlId="suchen">
+      <Form.Group as={Col} md="6" controlId="suchenemail">
         <Form.Control
           className="form-form-control-plaintext"
           type="text"
@@ -270,7 +271,7 @@ const PersonList: React.SFC<AdressbuchProps> = ( props) => {
 </Container>
     <DataTable
       idColumnName="id"
-      data={personal && personal ? personal : null}
+      data={personal!=null? personal : null}
       columns={columns}
       showHeader
       showSuche

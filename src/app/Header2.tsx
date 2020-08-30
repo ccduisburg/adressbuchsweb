@@ -25,7 +25,7 @@ const Header2: SFC<Props> = ({ match }) => {
         <Navbar bg="light" className="mb-2">
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
-              <Nav.Link as={Link} to={`${match.path}/persondetail`}>
+              <Nav.Link as={Link} to={`${match.path}/detail`}>
                 Persondetails
                         </Nav.Link>
               <Nav.Link as={Link} to={`${match.path}/personadd`}>
@@ -40,7 +40,7 @@ const Header2: SFC<Props> = ({ match }) => {
 
           </Form>
         </Navbar>
-        <Route path={`${match.path}/persondetail`} component={PersonDetail} />
+        <Route path={`${match.path}/detail`} component={PersonDetail} />
         <Route path={`${match.path}/personadd`} component={PersonHinzufuegen} />
         <Route path={`${match.path}/personen`} component={PersonList} />
       </Router>

@@ -116,6 +116,8 @@ const PersonHinzufuegen: React.SFC<AdressbuchProps> = (props) => {
 
     }
 
+
+
     // const registerEkfAktion = (evt: React.KeyboardEvent) => {
     //     if (evt.key.toLowerCase() === 'enter') {
     //         inputAktionTextRef.current !== null && inputAktionTextRef.current.focus();

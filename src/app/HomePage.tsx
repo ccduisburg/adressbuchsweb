@@ -12,7 +12,9 @@ return(
 <Route  path="/header" component={Header2} />    
      <Route path="/add" component={PersonHinzufuegen}/>  
       <Route exact path="/list" component={PersonList}/> 
-      <Route  path="/:id/details" component={Details}/>  
+       <Route  path="/:id/details"     
+      render={ (props) => <Details {...props}/>}/>
+       {/*component={Details} */}
 </Switch>
     
  

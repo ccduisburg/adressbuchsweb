@@ -40,7 +40,7 @@ const Details: React.SFC<Props> = ({ history, match }) => {
 
     useEffect(() => {
         getPerson();
-    }, [match.params]);
+    }, []);
 
     return (
         <div className="h-90">
