@@ -5,22 +5,16 @@ import { Person, Geschlescht } from '../types/Person';
 import * as TimeUtils from "../util/TimeUtil"
 import { getContacts, getContact } from './services/Requests';
 import { Container, Row, Card, Col, FormGroup, FormLabel, FormControl, FormControlProps, Accordion, Button, Navbar, Form } from 'react-bootstrap';
-export interface DetailsProps extends RouteComponentProps<{ id: string; }> { }
+// export interface DetailsProps extends RouteComponentProps<{ id: string; }> { }
 
-interface Props extends RouteComponentProps {
-    match: match<PathVariables>;
-}
-interface PathVariables {
-    id: string;
-}
+interface Props extends RouteComponentProps<PathVariables> {}
+     
+ interface PathVariables {
+     id: string;
+ }
 
-const Details: React.SFC<Props> = ({ history, match }) => {
-    const [vorname, setVorname] = useState<string | any>();
-    const [nachname, setNachname] = useState<string | any>();
-    const [geburtsdatum, setGeburtsdatum] = useState<string | any>();
-    const [email, setEmail] = useState<string | any>();
-    const [geschlecht, setGeschlescht] = useState<Geschlescht | any>();
-    const [adresse, setAdresse] = useState<string | any>();
+const Details: React.SFC<Props> = ({match}) => {
+   
     const [person, setPerson] = useState<Person>({
         id: 0,
         titel: "",
@@ -33,14 +27,14 @@ const Details: React.SFC<Props> = ({ history, match }) => {
 
     })
     const getPerson = async () => {
-        let r = (await getContact(Number(match.params.id))).data;
+        let r = await getContact(Number(match.params.id));
         console.log(r);
-        setPerson(r);
+        setPerson(r.data);
     }
-
+console.log("match.params.id")
     useEffect(() => {
         getPerson();
-    }, []);
+    }, [match.params.id]);
 
     return (
         <div className="h-90">
@@ -177,8 +171,8 @@ const Details: React.SFC<Props> = ({ history, match }) => {
 
 
                 </Row>
-           
-                <button onClick={() => history.goBack()}>Go Back</button>
+{/*            
+                <button onClick={() => history.goBack()}>Go Back</button> */}
             </Container>
   </div>
   </div>

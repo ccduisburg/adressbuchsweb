@@ -10,13 +10,18 @@ import { InputPerson } from '../types/DataTypes';
 import { editContact, deleteContact, getContacts, addContact, getPersonbyname, getPersonbyemail } from './services/Requests';
 import DataTablePagination from './DataTable/Pagination';
 import Swal from 'sweetalert2';
+import { History, LocationState } from "history";
 
 import withReactContent from 'sweetalert2-react-content';
-import { Link,RouteComponentProps,RouteProps } from 'react-router-dom';
+import { Link,RouteComponentProps,RouteProps, withRouter, Redirect } from 'react-router-dom';
 
-export interface AdressbuchProps { }
+export interface AdressbuchProps { 
+  someOfYourOwnProps: any;
+  history: History<LocationState>;
+  someMorePropsIfNeedIt: any;
+}
 
-const PersonList: React.SFC<AdressbuchProps> = ( props) => {
+const PersonList: React.SFC<AdressbuchProps> = ( {history}) => {
   const [nameFilter, setNameFilter] = React.useState<string | null>("");
   const [emailFilter, setEmailFilter] = React.useState<string | null>('');
   const [vorname, setVorname] = React.useState<string | any>();
@@ -62,6 +67,9 @@ const PersonList: React.SFC<AdressbuchProps> = ( props) => {
     });
 
   };
+
+
+
   const columns: DataTableColumn<Person>[] = [
     {
       name: 'Vorname',
@@ -226,8 +234,8 @@ const PersonList: React.SFC<AdressbuchProps> = ( props) => {
     {
       name: 'Details',
       accessor: (row) => (
-            <Link to={`/${row.id}/details`} className="btn btn-info shadow-sm"> Detail</Link> 
-
+             <Link to={`./details/${row.id}`} className="btn btn-info shadow-sm"> Detail</Link> 
+            
       ),
     }
 
@@ -235,7 +243,7 @@ const PersonList: React.SFC<AdressbuchProps> = ( props) => {
   ];
   return (<>
   <Container fluid={true} className="d-flex">
-            {/* left-side */}
+       
             <Container fluid={true} className="w-50">
     <Form.Row>
       <Form.Label>Suchen</Form.Label>
