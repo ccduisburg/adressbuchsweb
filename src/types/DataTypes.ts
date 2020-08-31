@@ -55,15 +55,5 @@ export type IdEntity = {
   id: Scalars['ID'],
 };
 
-export type InputPerson = {
-  vorname: Scalars['String'],
-  name: Scalars['String'],
-  skill?: Maybe<Scalars['String']>,
-  geburtsdatum?: Maybe<Scalars['Date']>,
-  title:string,  
-  email:string,
-  geshlecht:string,
-  geburstdatum:Date,
-  adresse: string;
-};
+
 

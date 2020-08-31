@@ -1,11 +1,9 @@
-import { Navbar, Nav, Form, FormControl, Button } from "react-bootstrap";
+import { Navbar, Nav, Form } from "react-bootstrap";
 import React, { SFC } from "react";
 import {
   BrowserRouter as Router,
-  Route,
   Link,
-  RouteComponentProps,
-  match
+
 } from "react-router-dom";
 import PersonDetail from "../components/Details";
 import PersonList from "../components/PersonList";

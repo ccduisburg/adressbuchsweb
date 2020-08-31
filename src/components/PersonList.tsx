@@ -1,27 +1,27 @@
 import * as React from 'react';
-import { Alert, Button, Form, Nav, FormControlProps, InputGroup, Row, Col, Container } from 'react-bootstrap';
+import { Button, Form, Nav, FormControlProps, Col, Container } from 'react-bootstrap';
 import { DataTableColumn } from './DataTable/types';
 import * as TimeUtils from '../util/TimeUtil';
 import DataTable from './DataTable/DataTable';
 import TableEditorText from './DataTable/Text';
-import useDataTableWithPagination from './DataTable/useDataTableWithPagination';
+
 import { Person } from '../types/Person';
-import { InputPerson } from '../types/DataTypes';
-import { editContact, deleteContact, getContacts, addContact, getPersonbyname, getPersonbyemail } from './services/Requests';
-import DataTablePagination from './DataTable/Pagination';
+
+import { deleteContact, getContacts, addContact, getPersonbyname, getPersonbyemail } from './services/Requests';
+
 import Swal from 'sweetalert2';
 import { History, LocationState } from "history";
 
 import withReactContent from 'sweetalert2-react-content';
-import { Link,RouteComponentProps,RouteProps, withRouter, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-export interface AdressbuchProps { 
+export interface AdressbuchProps {
   someOfYourOwnProps: any;
   history: History<LocationState>;
   someMorePropsIfNeedIt: any;
 }
 
-const PersonList: React.SFC<AdressbuchProps> = ( {history}) => {
+const PersonList: React.SFC<AdressbuchProps> = ({ history }) => {
   const [nameFilter, setNameFilter] = React.useState<string | null>("");
   const [emailFilter, setEmailFilter] = React.useState<string | null>('');
   const [vorname, setVorname] = React.useState<string | any>();
@@ -46,8 +46,8 @@ const PersonList: React.SFC<AdressbuchProps> = ( {history}) => {
     setPersonal(r);
   }
   React.useEffect(() => { getAdressbuch(); }, []);
-  React.useEffect(() => { if(nameFilter!=""){getPersonByname()}else getAdressbuch(); }, [nameFilter]);
-  React.useEffect(() => { if(emailFilter!=""){findPersonbyemail();}else getAdressbuch() }, [emailFilter]);
+  React.useEffect(() => { if (nameFilter !== "") { getPersonByname() } else getAdressbuch(); }, [nameFilter]);
+  React.useEffect(() => { if (emailFilter !== "") { findPersonbyemail(); } else getAdressbuch() }, [emailFilter]);
 
   function personDelete(id: number) {
     MySwal.fire({
@@ -84,7 +84,7 @@ const PersonList: React.SFC<AdressbuchProps> = ( {history}) => {
               titel: row.titel,
               email: row.email,
               geschlecht: row.geschlecht,
-              adresse: row.adresse
+              anschrift: row.anschrift
 
             };
             addContact(one).then(() => { getAdressbuch() }
@@ -108,7 +108,7 @@ const PersonList: React.SFC<AdressbuchProps> = ( {history}) => {
               titel: row.titel,
               email: row.email,
               geschlecht: row.geschlecht,
-              adresse: row.adresse
+              anschrift: row.anschrift
 
             };
             addContact(one).then(() => { getAdressbuch() }
@@ -117,6 +117,7 @@ const PersonList: React.SFC<AdressbuchProps> = ( {history}) => {
           }
         }
       } />,
+      sortBy: { fieldName: 'name' },
     },
 
     {
@@ -132,7 +133,7 @@ const PersonList: React.SFC<AdressbuchProps> = ( {history}) => {
               titel: row.titel,
               email: value,
               geschlecht: row.geschlecht,
-              adresse: row.adresse
+              anschrift: row.anschrift
 
             };
             addContact(one).then(() => { getAdressbuch() }
@@ -145,7 +146,7 @@ const PersonList: React.SFC<AdressbuchProps> = ( {history}) => {
     },
 
     {
-      name: 'Title',
+      name: 'Titel',
       accessor: row => <TableEditorText value={row.titel || ''} setValue={
         value => {
           if (value.length !== 0) {
@@ -157,8 +158,7 @@ const PersonList: React.SFC<AdressbuchProps> = ( {history}) => {
               titel: value,
               email: row.email,
               geschlecht: row.geschlecht,
-              adresse: row.adresse
-
+              anschrift: row.anschrift
             };
             addContact(one).then(() => { getAdressbuch() }
 
@@ -166,7 +166,7 @@ const PersonList: React.SFC<AdressbuchProps> = ( {history}) => {
           }
         }
       } />,
-      sortBy: { fieldName: 'email' },
+
     },
     {
       name: 'Geschlecht',
@@ -181,7 +181,7 @@ const PersonList: React.SFC<AdressbuchProps> = ( {history}) => {
               titel: value,
               email: row.email,
               geschlecht: row.geschlecht,
-              adresse: row.adresse
+              anschrift: row.anschrift
 
             };
             addContact(one).then(() => { getAdressbuch() }
@@ -199,8 +199,8 @@ const PersonList: React.SFC<AdressbuchProps> = ( {history}) => {
       )
     },
     {
-      name: 'Adresse',
-      accessor: row => <TableEditorText value={row.adresse || ''} setValue={
+      name: 'Anschrift',
+      accessor: row => <TableEditorText value={row.anschrift || ''} setValue={
         value => {
           if (value.length !== 0) {
             const one: Person = {
@@ -211,7 +211,7 @@ const PersonList: React.SFC<AdressbuchProps> = ( {history}) => {
               titel: value,
               email: row.email,
               geschlecht: row.geschlecht,
-              adresse: value
+              anschrift: value
 
             };
             addContact(one).then(() => { getAdressbuch() }
@@ -220,7 +220,7 @@ const PersonList: React.SFC<AdressbuchProps> = ( {history}) => {
           }
         }
       } />,
-      sortBy: { fieldName: 'adresse' },
+      sortBy: { fieldName: 'anschrift' },
     },
     {
       name: 'Löschen',
@@ -234,52 +234,52 @@ const PersonList: React.SFC<AdressbuchProps> = ( {history}) => {
     {
       name: 'Details',
       accessor: (row) => (
-             <Link to={`./details/${row.id}`} className="btn btn-info shadow-sm"> Detail</Link> 
-            
+        <Link to={`./details/${row.id}`} className="btn btn-info shadow-sm"> Detail</Link>
+
       ),
     }
 
-   
+
   ];
   return (<>
-  <Container fluid={true} className="d-flex">
-       
-            <Container fluid={true} className="w-50">
-    <Form.Row>
-      <Form.Label>Suchen</Form.Label>
-    </Form.Row>
-    <Form.Row>
-      <Form.Group as={Col} md="6" controlId="suchen">
+    <Container fluid={true} className="d-flex">
 
-        <Form.Control
-          className="form-form-control-plaintext"
-          type="text"
-          value={`${nameFilter}`}
-          onChange={(event) => {
-            setNameFilter(String(event.currentTarget.value));
-          }}
-          placeholder="Name"
-        />
+      <Container fluid={true} className="w-50">
+        <Form.Row>
+          <Form.Label>Suchen</Form.Label>
+        </Form.Row>
+        <Form.Row>
+          <Form.Group as={Col} md="6" controlId="suchen">
 
-      </Form.Group>
-      <Form.Group as={Col} md="6" controlId="suchenemail">
-        <Form.Control
-          className="form-form-control-plaintext"
-          type="text"
-          value={`${emailFilter}`}
-          onChange={(event) => {
-            setEmailFilter(String(event.currentTarget.value));
-          }}
-          placeholder="email"
-        />
-      </Form.Group>
-    </Form.Row>
+            <Form.Control
+              className="form-form-control-plaintext"
+              type="text"
+              value={`${nameFilter}`}
+              onChange={(event) => {
+                setNameFilter(String(event.currentTarget.value));
+              }}
+              placeholder="Name"
+            />
 
+          </Form.Group>
+          <Form.Group as={Col} md="6" controlId="suchenemail">
+            <Form.Control
+              className="form-form-control-plaintext"
+              type="text"
+              value={`${emailFilter}`}
+              onChange={(event) => {
+                setEmailFilter(String(event.currentTarget.value));
+              }}
+              placeholder="E-Mail"
+            />
+          </Form.Group>
+        </Form.Row>
+
+      </Container>
     </Container>
-</Container>
     <DataTable
       idColumnName="id"
-      data={personal!=null? personal : null}
+      data={personal != null ? personal : null}
       columns={columns}
       showHeader
       showSuche

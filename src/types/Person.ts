@@ -6,7 +6,7 @@ export interface Person {
     email: string,
     geschlecht:string,
     geburstdatum:Date,
-    adresse: string;
+    anschrift: string;
 }
 export type Maybe<T> = T | null | undefined;
 /** All built-in and custom scalars, mapped to their actual values */
